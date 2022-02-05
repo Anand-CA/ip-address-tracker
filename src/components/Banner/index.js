@@ -2,24 +2,27 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Banner = () => {
+const Banner = ({ coordinates, setCoordinates }) => {
   const [data, setData] = useState([]);
   const [ipAddress, setIpAddress] = useState("");
 
+  const fetchData = async () => {
+    const res = await axios.get(
+      `https://geo.ipify.org/api/v2/country,city,vpn?apiKey=${process.env.REACT_APP_API_KEY}&ipAddress=${ipAddress}`
+    );
+    setData(res.data);
+    setCoordinates({
+      lat: res.data.location.lat,
+      lng: res.data.location.lng,
+    });
+  };
   useEffect(() => {
     fetchData();
     return () => {
       setData([]);
+      setCoordinates({ lat: 0, lng: 0 });
     };
   }, []);
-
-  const fetchData = async () => {
-    const res = await axios.get(
-      `https://geo.ipify.org/api/v2/country?apiKey=${process.env.REACT_APP_API_KEY}&ipAddress=${ipAddress}`
-    );
-    setData(res.data);
-    console.log(res.data);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +53,7 @@ const Banner = () => {
 
           <Stat>
             <h5>LOCATION</h5>
-            <h2>{data.location?.region}</h2>
+            <h2>{data.location?.city}</h2>
           </Stat>
 
           <Stat>
@@ -71,7 +74,6 @@ const Banner = () => {
 export default Banner;
 
 const Wrapper = styled.div`
-  border: 1px solid lightgrey;
   background: url("/images/pattern-bg.png") no-repeat center center / cover;
 `;
 
@@ -80,7 +82,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  padding: 4.5rem;
+  padding: 4.5rem 0;
 
   h1 {
     color: #fff;
@@ -121,18 +123,26 @@ const SearchBox = styled.div`
 const StatsBox = styled.div`
   display: flex;
   align-items: center;
-  padding: 2.5rem 0;
+  z-index: 2;
+  padding: 2.5rem;
   border-radius: 0.5rem;
+  gap: 1.5rem;
   background: #fff;
   width: min(95%, 70rem);
   flex-flow: row wrap;
   margin-bottom: -150px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
 `;
 const Stat = styled.div`
   border-right: 1px solid lightgrey;
-  padding: 0 3rem;
-  flex-basis: 24%;
+  flex-basis: 22%;
+  @media (max-width: 768px) {
+    flex-basis: 100%;
+    border-right: none;
+  }
   h5 {
     color: hsl(0, 0%, 59%);
     font-size: 0.8rem;
