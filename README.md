@@ -13,9 +13,9 @@ Users should be able to:
 
 ### Screenshot
 
-<img src="./public/images/screenshot-desktop.png" alt="desktop">
-<img src="./public/images/screenshot-tablet.png" alt="tablet" ">
-<img src="./public/images/screenshot-mobile.png" alt="mobile">
+<img src="./public/images/desktop.png" alt="desktop">
+<img src="./public/images/tablet.png" alt="tablet" ">
+<img src="./public/images/mobile.png" alt="mobile">
 
 ### Links
 
