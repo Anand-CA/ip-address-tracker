@@ -13,13 +13,12 @@ Users should be able to:
 
 ### Screenshot
 
-<img src="./public/images/screenshot-desktop.png" alt="desktop">
-<img src="./public/images/screenshot-tablet.png" alt="tablet" ">
-<img src="./public/images/screenshot-mobile.png" alt="mobile">
+<img src="./public/images/desktop.png" alt="desktop">
+<img src="./public/images/tablet.png" width="60%" alt="tablet" ">
+<img src="./public/images/mobile.png" width="50%" alt="mobile">
 
 ### Links
 
-- [Github URL](https://github.com/densec/ip-address-tracker)
 - [Live Demo](https://your-live-site-url.com)
 
 ## My process
